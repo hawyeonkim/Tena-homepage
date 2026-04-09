@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NARRATIVE - High-End Editorial Design Agency</title>
+    <!-- Google Fonts for typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <h1 class="logo-text">TENA DESIGN</h1>
+        <p class="subtitle">디자인으로 브랜드의 본질을 시각화합니다</p>
+    </header>
+
+    <nav class="category-nav">
+        <div class="nav-container">
+            <button class="nav-btn group active" data-filter="website">
+                <span class="ko">홈페이지</span><span class="en">WEBSITE</span>
+            </button>
+            <button class="nav-btn group" data-filter="detail">
+                <span class="ko">상세페이지</span><span class="en">DETAIL PAGE</span>
+            </button>
+            <button class="nav-btn group" data-filter="branding">
+                <span class="ko">브랜딩</span><span class="en">BRANDING</span>
+            </button>
+            <button class="nav-btn group" data-filter="logo">
+                <span class="ko">로고</span><span class="en">LOGO</span>
+            </button>
+            <button class="nav-btn group" data-filter="editorial">
+                <span class="ko">AI 화보컷</span><span class="en">AI EDITORIAL</span>
+            </button>
+        </div>
+    </nav>
+
+    <main class="portfolio-grid">
+        <!-- Card 1: Website -->
+        <a href="detail.html" class="portfolio-card" data-category="website">
+            <div class="card-content">
+                <h2 class="card-title">WEBSITE:<br>WEB DESIGN</h2>
+                <div class="card-body">
+                    <p class="card-desc">Web designs the world designer song or rad UI intents.</p>
+                    <div class="card-image-wrapper">
+                        <img src="images/webdesign.png" alt="Web Design Mockup">
+                    </div>
+                </div>
+            </div>
+            <div class="card-action">프로젝트 보기 (View Project) &rarr;</div>
+        </a>
+
+        <!-- Card 2: Detail Page -->
+        <a href="detail.html" class="portfolio-card" data-category="detail">
+            <div class="card-content">
+                <h2 class="card-title">DETAIL PAGE:<br>PRODUCT FOCUS</h2>
+                <div class="card-body">
+                    <p class="card-desc">Creating deep, engaging product detail narratives with minimal layouts.</p>
+                    <div class="card-image-wrapper">
+                        <img src="images/detail.png" alt="Detail Page Mockup">
+                    </div>
+                </div>
+            </div>
+            <div class="card-action">프로젝트 보기 (View Project) &rarr;</div>
+        </a>
+
+        <!-- Card 3: Branding -->
+        <a href="detail.html" class="portfolio-card" data-category="branding">
+            <div class="card-content">
+                <h2 class="card-title">BRANDING:<br>AESOP X KITH</h2>
+                <div class="card-body">
+                    <p class="card-desc">Involved the rarest designature all your branch projects.</p>
+                    <div class="card-image-wrapper">
+                        <img src="images/branding.png" alt="Aesop x Kith Branding Mockup">
+                    </div>
+                </div>
+            </div>
+            <div class="card-action">프로젝트 보기 (View Project) &rarr;</div>
+        </a>
+
+        <!-- Card 4: Logo -->
+        <a href="detail.html" class="portfolio-card" data-category="logo">
+            <div class="card-content">
+                <h2 class="card-title">LOGO:<br>MINIMAL MARK</h2>
+                <div class="card-body">
+                    <p class="card-desc">High contrast, sharp typography and negative space exploration.</p>
+                    <div class="card-image-wrapper">
+                        <img src="images/logo.png" alt="Logo Mockup">
+                    </div>
+                </div>
+            </div>
+            <div class="card-action">프로젝트 보기 (View Project) &rarr;</div>
+        </a>
+
+        <!-- Card 5: AI Editorial -->
+        <a href="detail.html" class="portfolio-card" data-category="editorial">
+            <div class="card-content">
+                <h2 class="card-title">AI EDITORIAL:<br>FASHION CUTS</h2>
+                <div class="card-body">
+                    <p class="card-desc">High-end avant-garde fashion photography entirely generated with AI.</p>
+                    <div class="card-image-wrapper">
+                        <img src="images/aieditorial.png" alt="AI Editorial Fashion">
+                    </div>
+                </div>
+            </div>
+            <div class="card-action">프로젝트 보기 (View Project) &rarr;</div>
+        </a>
+
+    </main>
+
+    <footer class="footer">
+        <div class="footer-left">
+            <p class="footer-agency-name">HIGH-END EDITORIAL<br>DESIGN AGENCY LTD.</p>
+            <a href="https://open.kakao.com/o/svlO03ng" target="_blank" class="footer-cta-link">
+                <h2 class="footer-cta group">
+                    <span class="default">KAKAO</span>
+                    <span class="hover-text">연락하기</span>
+                </h2>
+            </a>
+        </div>
+        <div class="footer-right">
+            <ul class="footer-links">
+                <li><a href="#website" class="group"><span class="en default">WEBSITE</span><span class="ko hover-text">홈페이지</span> <span>&rarr;</span></a></li>
+                <li><a href="#detail" class="group"><span class="en default">DETAIL PAGE</span><span class="ko hover-text">상세페이지</span> <span>&rarr;</span></a></li>
+                <li><a href="#branding" class="group"><span class="en default">BRANDING</span><span class="ko hover-text">브랜딩</span> <span>&rarr;</span></a></li>
+                <li><a href="#logo" class="group"><span class="en default">LOGO</span><span class="ko hover-text">로고</span> <span>&rarr;</span></a></li>
+                <li><a href="#editorial" class="group"><span class="en default">AI EDITORIAL</span><span class="ko hover-text">AI 화보컷</span> <span>&rarr;</span></a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <!-- Filtering Logic -->
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const grid = document.querySelector('.portfolio-grid');
+        const originalCards = document.querySelectorAll('.portfolio-card');
+
+        // Task 1: Clone cards so there are exactly 10 of each category (5 rows of 2 columns)
+        originalCards.forEach(card => {
+            for(let i=0; i<9; i++) {
+                grid.appendChild(card.cloneNode(true));
+            }
+        });
+
+        // Re-select all cards after cloning
+        const allCards = document.querySelectorAll('.portfolio-card');
+        const navBtns = document.querySelectorAll('.nav-btn');
+
+        function filterCards(category) {
+            allCards.forEach(card => {
+                if (card.dataset.category === category) {
+                    card.style.display = 'flex'; // Restore matching cards
+                } else {
+                    card.style.display = 'none'; // Hide non-matching
+                }
+            });
+        }
+
+        function activateNav(filter) {
+            // Remove active state from all nav buttons
+            navBtns.forEach(b => b.classList.remove('active'));
+            
+            // Add active state to top nav button
+            const targetNav = document.querySelector(`.nav-btn[data-filter="${filter}"]`);
+            if (targetNav) targetNav.classList.add('active');
+
+            // Perform filtering
+            filterCards(filter);
+        }
+
+        // Top nav buttons event config
+        navBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                activateNav(btn.dataset.filter);
+            });
+        });
+
+        // Task 2: Footer links trigger the navigation and scroll up
+        const footerLinks = document.querySelectorAll('.footer-links a');
+        footerLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault(); // Prevent hash jump
+                const href = link.getAttribute('href').replace('#', '');
+                activateNav(href);
+                // Scroll to top layout smoothly
+                document.querySelector('.category-nav').scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Initialize grid by activating the default filter on load
+        const defaultActiveBtn = document.querySelector('.nav-btn.active');
+        if (defaultActiveBtn) {
+            filterCards(defaultActiveBtn.dataset.filter);
+        }
+    });
+    </script>
+</body>
+</html>
