@@ -18,31 +18,71 @@
         <p class="subtitle"><a href="index.html" style="color: black; text-decoration: none;">&larr; Back to Home</a></p>
     </header>
 
-    <main class="portfolio-grid" style="grid-template-columns: 1fr; margin-top: 50px;">
-        <article class="portfolio-card reveal" style="padding: 50px;">
-            <h2 class="card-title" style="font-size: 3rem;">IN-DEPTH EDITORIAL</h2>
-            <p class="card-desc" style="font-size: 1.2rem; color: #fff; margin-bottom: 30px;">
-                This is a detailed showcase of the specific project you clicked on. We utilize high-end brutalist principles and deep research to construct meaningful brand narratives.
-            </p>
-            <div class="card-image-wrapper" style="max-height: 600px;">
-                <img src="images/branding.png" alt="Detail Graphic" style="width: 100%; height: auto;">
+    <main style="margin-top: 40px;">
+        <!-- Removed 'reveal' class for instant visibility -->
+        <div class="detail-content-view">
+            <div id="project-media" class="project-media-wrapper">
+                <!-- Media will be injected here instantly by the script below -->
             </div>
-        </article>
+        </div>
+        
+        <!-- Premium Back Navigation -->
+        <div style="text-align: center; padding: 60px 0;">
+            <a href="index.html" class="nav-btn group" style="text-decoration: none; display: inline-flex; border: 2px solid #000; padding: 20px 40px;">
+                <span class="default">&larr; BACK TO HOME (SELECTION)</span>
+                <span class="hover-text">&larr; 목록으로 돌아가기 (홈으로)</span>
+            </a>
+        </div>
     </main>
 
+    <style>
+        .detail-content-view {
+            width: 100%;
+            max-width: 860px; /* Adjusted per request */
+            margin: 0 auto;
+            background-color: #000;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.1);
+            min-height: 800px; /* Pre-size to avoid jump */
+        }
+        .project-media-wrapper {
+            width: 100%;
+        }
+        .project-media-wrapper img, .project-media-wrapper video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+    </style>
+
     <script>
-    document.addEventListener('DOMContentLoaded', () => {
+    (function() {
+        // Immediate execution to avoid DOMContentLoaded delay
         const urlParams = new URLSearchParams(window.location.search);
-        const mediaSrc = urlParams.get('img');
+        let mediaSrc = urlParams.get('img');
+        
         if (mediaSrc) {
-            const wrapper = document.querySelector('.card-image-wrapper');
-            if (mediaSrc.toLowerCase().endsWith('.mp4')) {
-                wrapper.innerHTML = `<video src="${mediaSrc}" autoplay loop muted playsinline style="width: 100%; height: auto;"></video>`;
-            } else {
-                wrapper.innerHTML = `<img src="${mediaSrc}" alt="Detail Graphic" style="width: 100%; height: auto;">`;
+            mediaSrc = mediaSrc.replace(/ /g, '%20');
+            const container = document.getElementById('project-media');
+            if (container) {
+                if (mediaSrc.toLowerCase().endsWith('.mp4')) {
+                    container.innerHTML = `<video src="${mediaSrc}" autoplay loop muted playsinline style="width: 100%; height: auto;"></video>`;
+                } else {
+                    // Pre-creating image object for faster rendering trigger
+                    const img = new Image();
+                    img.src = mediaSrc;
+                    img.style.width = '100%';
+                    img.style.height = 'auto';
+                    img.alt = 'Project Design';
+                    img.onerror = function() {
+                        document.body.insertAdjacentHTML('beforeend', '<p style=color:red;text-align:center>Image not found: ' + mediaSrc + '</p>');
+                    };
+                    container.appendChild(img);
+                }
             }
         }
+    })();
 
+    document.addEventListener('DOMContentLoaded', () => {
         const cursor = document.querySelector('.custom-cursor');
         document.addEventListener('mousemove', e => {
             cursor.style.left = e.clientX + 'px';
