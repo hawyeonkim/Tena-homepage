@@ -12,13 +12,16 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="custom-cursor"></div>
     <header class="header">
-        <h1 class="logo-text">TENA DESIGN</h1>
+        <div class="logo-wrapper">
+            <h1 class="logo-text">TENA DESIGN</h1>
+        </div>
         <p class="subtitle">디자인으로 브랜드의 본질을 시각화합니다</p>
     </header>
 
     <nav class="category-nav">
-        <div class="nav-container">
+        <div class="nav-container reveal">
             <button class="nav-btn group active" data-filter="website">
                 <span class="ko">홈페이지</span><span class="en">WEBSITE</span>
             </button>
@@ -111,7 +114,7 @@
     </main>
 
     <footer class="footer">
-        <div class="footer-left">
+        <div class="footer-left reveal delay-1">
             <p class="footer-agency-name">HIGH-END EDITORIAL<br>DESIGN AGENCY LTD.</p>
             <a href="https://open.kakao.com/o/svlO03ng" target="_blank" class="footer-cta-link">
                 <h2 class="footer-cta group">
@@ -120,7 +123,7 @@
                 </h2>
             </a>
         </div>
-        <div class="footer-right">
+        <div class="footer-right reveal delay-2">
             <ul class="footer-links">
                 <li><a href="#website" class="group"><span class="en default">WEBSITE</span><span class="ko hover-text">홈페이지</span> <span>&rarr;</span></a></li>
                 <li><a href="#detail" class="group"><span class="en default">DETAIL PAGE</span><span class="ko hover-text">상세페이지</span> <span>&rarr;</span></a></li>
@@ -131,16 +134,54 @@
         </div>
     </footer>
 
-    <!-- Filtering Logic -->
+    <!-- Filtering & Animation Logic -->
     <script>
     document.addEventListener('DOMContentLoaded', () => {
+        // 1. Custom Cursor Logic
+        const cursor = document.querySelector('.custom-cursor');
+        document.addEventListener('mousemove', e => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        // Hover expand cursor
+        const hoverElements = document.querySelectorAll('a, button, .portfolio-card');
+        hoverElements.forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+        });
+
+        // 2. Intersection Observer (Scroll Reveal)
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        // Connect static reveals
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+        // 3. Grid Logic
         const grid = document.querySelector('.portfolio-grid');
         const originalCards = document.querySelectorAll('.portfolio-card');
 
-        // Task 1: Clone cards so there are exactly 10 of each category (5 rows of 2 columns)
+        // Clone cards & attach observers
         originalCards.forEach(card => {
+            card.classList.add('reveal');
+            revealObserver.observe(card);
+
             for(let i=0; i<9; i++) {
-                grid.appendChild(card.cloneNode(true));
+                const clone = card.cloneNode(true);
+                grid.appendChild(clone);
+                
+                // Observe the clone for scroll animation
+                revealObserver.observe(clone);
+                
+                // Bind hover effects to new clones
+                clone.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+                clone.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
             }
         });
 

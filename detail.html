@@ -10,13 +10,16 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="custom-cursor"></div>
     <header class="header">
-        <h1 class="logo-text detail-title">PROJECT DETAILS</h1>
+        <div class="logo-wrapper">
+            <h1 class="logo-text detail-title">PROJECT DETAILS</h1>
+        </div>
         <p class="subtitle"><a href="index.html" style="color: black; text-decoration: none;">&larr; Back to Home</a></p>
     </header>
 
     <main class="portfolio-grid" style="grid-template-columns: 1fr; margin-top: 50px;">
-        <article class="portfolio-card" style="padding: 50px;">
+        <article class="portfolio-card reveal" style="padding: 50px;">
             <h2 class="card-title" style="font-size: 3rem;">IN-DEPTH EDITORIAL</h2>
             <p class="card-desc" style="font-size: 1.2rem; color: #fff; margin-bottom: 30px;">
                 This is a detailed showcase of the specific project you clicked on. We utilize high-end brutalist principles and deep research to construct meaningful brand narratives.
@@ -26,5 +29,27 @@
             </div>
         </article>
     </main>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const cursor = document.querySelector('.custom-cursor');
+        document.addEventListener('mousemove', e => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        const hoverElements = document.querySelectorAll('a, button, .portfolio-card');
+        hoverElements.forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+        });
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => entry.isIntersecting && entry.target.classList.add('active'));
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+    });
+    </script>
 </body>
 </html>
