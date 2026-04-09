@@ -32,6 +32,17 @@
 
     <script>
     document.addEventListener('DOMContentLoaded', () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const mediaSrc = urlParams.get('img');
+        if (mediaSrc) {
+            const wrapper = document.querySelector('.card-image-wrapper');
+            if (mediaSrc.toLowerCase().endsWith('.mp4')) {
+                wrapper.innerHTML = `<video src="${mediaSrc}" autoplay loop muted playsinline style="width: 100%; height: auto;"></video>`;
+            } else {
+                wrapper.innerHTML = `<img src="${mediaSrc}" alt="Detail Graphic" style="width: 100%; height: auto;">`;
+            }
+        }
+
         const cursor = document.querySelector('.custom-cursor');
         document.addEventListener('mousemove', e => {
             cursor.style.left = e.clientX + 'px';
