@@ -177,6 +177,7 @@ body {
     width: 100%;
     flex-grow: 1;
     overflow: hidden;
+    position: relative;
 }
 
 .card-image-wrapper img {
@@ -185,10 +186,75 @@ body {
     object-fit: cover;
     display: block;
     transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    z-index: 1;
 }
 
-.portfolio-card:hover .card-image-wrapper img {
+/* Glassmorphism background for transparent PNGs */
+.card-image-wrapper .backdrop-blur {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: blur(40px) saturate(2);
+    transform: translate(-50%, -50%) scale(1.1);
+    opacity: 0.85; /* Highly opaque to retain color */
+    z-index: 0;
+    pointer-events: none;
+    transition: none; /* No hover transition for background */
+}
+
+/* Sharp foreground */
+.card-image-wrapper .foreground-img {
+    object-fit: contain; /* Don't crop product shots */
+    padding: 0;
+    width: 90%; /* Forces ~5% margin max, utilizing full space */
+    height: 90%;
+    margin: auto;
+}
+
+.portfolio-card:hover .card-image-wrapper img:not(.backdrop-blur) {
     transform: scale(1.08); /* premium editorial zoom on hover */
+}
+
+/* --------- Detail Page Specific Layout --------- */
+.portfolio-card[data-category="detail"] .card-content {
+    flex-direction: row;
+    gap: 40px;
+    align-items: stretch;
+    min-height: 550px;
+}
+
+.portfolio-card[data-category="detail"] .card-header {
+    width: 40%;
+    margin-bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Pulls description up right under title */
+    gap: 30px;
+}
+
+.portfolio-card[data-category="detail"] .card-title {
+    font-size: 2.5rem; /* Adjusted to prevent bad wrapping while staying huge */
+    line-height: 1.1;
+    margin-bottom: 0;
+}
+
+.portfolio-card[data-category="detail"] .card-desc {
+    color: #bbb;
+    font-size: 1.05rem;
+    line-height: 1.6;
+}
+
+.portfolio-card[data-category="detail"] .card-image-wrapper {
+    width: 60%;
+    background-color: #f7f7f7; /* Very important: bright backdrop base so the blur doesn't get sucked into the black card */
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Action link at the bottom of the card */
@@ -345,6 +411,42 @@ body {
     backdrop-filter: blur(4px);
 }
 
+/* Floating Contact Button */
+.floating-contact-btn {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    left: auto;
+    top: auto;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff; /* White base to stand out against black footer */
+    color: #000;
+    padding: 18px 26px;
+    border: 2px solid #000;
+    box-shadow: 4px 4px 0px rgba(0,0,0,1); /* Brutalist hard shadow to pop against white page */
+    font-size: 1.1rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    text-decoration: none;
+    transform: none;
+    transition: background-color 0.2s, color 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+
+.floating-contact-btn:hover {
+    background-color: #000;
+    color: #fff;
+    /* Satisfying tactile press effect */
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0px rgba(0,0,0,1);
+}
+
+.floating-contact-btn .hover-text { display: none; }
+.floating-contact-btn.group:hover .default { display: none; }
+.floating-contact-btn.group:hover .hover-text { display: inline; }
+
 /* Reveal classes */
 .reveal {
     opacity: 0;
@@ -374,4 +476,30 @@ body {
     .card-header { flex-direction: column; align-items: flex-start; gap: 10px; }
     .card-desc { text-align: left; padding-bottom: 0; }
     .card-image-wrapper { height: 250px; }
+    
+    /* Revert detail card to stack on mobile */
+    .portfolio-card[data-category="detail"] .card-content {
+        flex-direction: column;
+        gap: 20px;
+    }
+    .portfolio-card[data-category="detail"] .card-header {
+        width: 100%;
+    }
+    .portfolio-card[data-category="detail"] .card-image-wrapper {
+        width: 100%;
+        height: 350px;
+    }
+    
+    .floating-contact-btn {
+        top: auto;
+        bottom: 20px;
+        right: 20px;
+        transform: none;
+        padding: 14px 20px;
+        font-size: 0.9rem;
+    }
+    
+    .floating-contact-btn:hover {
+        transform: translate(2px, 2px); /* Maintain the press effect */
+    }
 }
